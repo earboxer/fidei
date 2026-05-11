@@ -111,28 +111,29 @@
 										<property name="can-navigate-back">true</property>
 										<property name="can-navigate-forward">true</property>
 										<child>
-											<object class="AdwLeaflet" id="selector_stack">
-												<property name="can-unfold">false</property>
-												<property name="can-navigate-back">true</property>
-												<property name="can-navigate-forward">false</property>
-												<property name="transition-type">ADW_LEAFLET_TRANSITION_TYPE_SLIDE</property>
+											<object class="AdwNavigationView" id="selector_stack">
 												<child>
-													<object class="GtkScrolledWindow" id="booksel_scroll">
-														<property name="hscrollbar_policy">never</property>
+													<object class="AdwNavigationPage">
+														<property name="title">Book Selection</property>
 														<property name="child">
-															<object class="AdwClampScrollable">
-																<property name="margin-end">8</property>
+															<object class="GtkScrolledWindow" id="booksel_scroll">
+																<property name="hscrollbar_policy">never</property>
 																<property name="child">
-																	<object class="GtkListView" id="book_selector">
-																		<property name="single-click-activate">true</property>
-																		<property name="factory">
-																			<object class="GtkBuilderListItemFactory">
-																				<property name="resource">/arpa/sp1rit/Fidei/ui/factory_bookitem.ui</property>
+																	<object class="AdwClampScrollable">
+																		<property name="margin-end">8</property>
+																		<property name="child">
+																			<object class="GtkListView" id="book_selector">
+																				<property name="single-click-activate">true</property>
+																				<property name="factory">
+																					<object class="GtkBuilderListItemFactory">
+																						<property name="resource">/arpa/sp1rit/Fidei/ui/factory_bookitem.ui</property>
+																					</object>
+																				</property>
+																				<style>
+																					<class name="navigation-sidebar"/>
+																				</style>
 																			</object>
 																		</property>
-																		<style>
-																			<class name="navigation-sidebar"/>
-																		</style>
 																	</object>
 																</property>
 															</object>
@@ -140,53 +141,45 @@
 													</object>
 												</child>
 												<child>
-													<object class="GtkBox" id="chaptersel_box">
-														<property name="orientation">vertical</property>
-														<child>
-															<object class="GtkButton" id="chapter_back_book_navbtn">
-																<property name="icon-name">go-previous-symbolic</property>
-																<property name="margin-top">8</property>
-																<property name="margin-start">8</property>
-																<property name="margin-end">12</property>
-																<property name="margin-bottom">8</property>
-																<style>
-																	<class name="pill"/>
-																</style>
-															</object>
-														</child>
-														<child>
-															<object class="GtkSeparator">
-																<property name="orientation">horizontal</property>
-															</object>
-														</child>
-														<child>
-															<object class="GtkScrolledWindow">
-																<property name="width-request">187</property>
-																<property name="hscrollbar_policy">never</property>
-																<property name="vexpand">true</property>
-																<property name="child">
-																	<object class="AdwClampScrollable">
-																		<property name="margin-top">8</property>
-																		<property name="margin-start">8</property>
-																		<property name="margin-end">12</property>
-																		<property name="margin-bottom">8</property>
+													<object class="AdwNavigationPage" id="chaptersel_page">
+														<property name="title">Chapter Selection</property>
+														<property name="child">
+															<object class="AdwToolbarView">
+																<child type="top">
+																	<object class="AdwHeaderBar">
+																		<property name="show-end-title-buttons">false</property>
+																	</object>
+																</child>
+														    <property name="content">
+																	<object class="GtkScrolledWindow">
+																		<property name="width-request">187</property>
+																		<property name="hscrollbar_policy">never</property>
+																		<property name="vexpand">true</property>
 																		<property name="child">
-																			<object class="GtkGridView" id="chapter_selector">
-																				<property name="single-click-activate">true</property>
-																				<property name="factory">
-																					<object class="GtkBuilderListItemFactory">
-																						<property name="resource">/arpa/sp1rit/Fidei/ui/factory_chapteritem.ui</property>
+																			<object class="AdwClampScrollable">
+																				<property name="margin-top">8</property>
+																				<property name="margin-start">8</property>
+																				<property name="margin-end">12</property>
+																				<property name="margin-bottom">8</property>
+																				<property name="child">
+																					<object class="GtkGridView" id="chapter_selector">
+																						<property name="single-click-activate">true</property>
+																						<property name="factory">
+																							<object class="GtkBuilderListItemFactory">
+																								<property name="resource">/arpa/sp1rit/Fidei/ui/factory_chapteritem.ui</property>
+																							</object>
+																						</property>
 																					</object>
 																				</property>
 																			</object>
 																		</property>
+																		<style>
+																			<class name="view"/>
+																		</style>
 																	</object>
 																</property>
-																<style>
-																	<class name="view"/>
-																</style>
 															</object>
-														</child>
+														</property>
 													</object>
 												</child>
 											</object>

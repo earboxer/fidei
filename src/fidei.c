@@ -67,11 +67,11 @@ typedef struct {
 	// content-parent
 	AdwLeaflet* main;
 	// book/chapter select
-	AdwLeaflet* selector_stack;
+	AdwNavigationView* selector_stack;
 	GtkScrolledWindow* booksel_scroll;
 	GtkListView* book_selector;
+	AdwNavigationPage* chaptersel_page;
 	GtkBox* chaptersel_box;
-	GtkButton* chapter_back_book_navbtn;
 	GtkGridView* chapter_selector;
 	// content
 	GtkBox* content_actions;
@@ -151,8 +151,7 @@ void fidei_appwindow_class_init(FideiAppWindowClass* class) {
 	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, selector_stack);
 	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, booksel_scroll);
 	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, book_selector);
-	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, chaptersel_box);
-	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, chapter_back_book_navbtn);
+	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, chaptersel_page);
 	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, chapter_selector);
 	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, content_actions);
 	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, leaflet_back_navbtn);
@@ -285,12 +284,7 @@ static void book_clicked(GtkListView* view, guint pos, FideiAppWindow* self) {
 	gtk_grid_view_set_model(priv->chapter_selector, GTK_SELECTION_MODEL(chaptermodel));
 	g_object_unref(chaptermodel);
 
-	adw_leaflet_navigate(priv->selector_stack, ADW_NAVIGATION_DIRECTION_FORWARD);
-}
-
-static void chapter_back_book_navbtn_clicked(GtkButton*, FideiAppWindow* self) {
-	FideiAppWindowPrivate* priv = fidei_appwindow_get_instance_private(self);
-	adw_leaflet_navigate(priv->selector_stack, ADW_NAVIGATION_DIRECTION_BACK);
+	adw_navigation_view_push(priv->selector_stack, priv->chaptersel_page);
 }
 
 static void chapter_clicked(GtkListView*, guint pos, FideiAppWindow* self) {
@@ -346,7 +340,6 @@ void fidei_appwindow_init(FideiAppWindow* self) {
 
 	g_signal_connect(priv->book_selector, "activate", G_CALLBACK(book_clicked), self);
 
-	g_signal_connect(priv->chapter_back_book_navbtn, "clicked", G_CALLBACK(chapter_back_book_navbtn_clicked), self);
 	g_signal_connect(priv->chapter_selector, "activate", G_CALLBACK(chapter_clicked), self);
 
 	g_signal_connect(priv->leaflet_back_navbtn, "clicked", G_CALLBACK(leaflet_back_navbtn_clicked), self);
