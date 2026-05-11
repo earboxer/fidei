@@ -65,7 +65,7 @@ typedef struct {
 	GtkButton* bibledir_btn;
 
 	// content-parent
-	AdwLeaflet* main;
+	AdwNavigationSplitView* main;
 	// book/chapter select
 	AdwNavigationView* selector_stack;
 	GtkScrolledWindow* booksel_scroll;
@@ -75,7 +75,6 @@ typedef struct {
 	GtkGridView* chapter_selector;
 	// content
 	GtkBox* content_actions;
-	GtkButton* leaflet_back_navbtn;
 	GtkButton* chapter_prev_navbtn;
 	GtkButton* chapter_fwd_navbtn;
 	GtkScrolledWindow* content;
@@ -154,7 +153,6 @@ void fidei_appwindow_class_init(FideiAppWindowClass* class) {
 	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, chaptersel_page);
 	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, chapter_selector);
 	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, content_actions);
-	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, leaflet_back_navbtn);
 	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, chapter_prev_navbtn);
 	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, chapter_fwd_navbtn);
 	gtk_widget_class_bind_template_child_private(widget_class, FideiAppWindow, content);
@@ -293,10 +291,6 @@ static void chapter_clicked(GtkListView*, guint pos, FideiAppWindow* self) {
 	fidei_appwindow_open_chapter(self, fidei_biblebook_get_booknum(priv->active_biblebook), pos);
 }
 
-static void leaflet_back_navbtn_clicked(GtkButton*, FideiAppWindow* self) {
-	FideiAppWindowPrivate* priv = fidei_appwindow_get_instance_private(self);
-	adw_leaflet_navigate(priv->main, ADW_NAVIGATION_DIRECTION_BACK);
-}
 static void chapter_prev_navbtn_clicked(GtkButton*, FideiAppWindow* self) {
 	FideiAppWindowPrivate* priv = fidei_appwindow_get_instance_private(self);
 	fidei_appwindow_open_chapter(self, fidei_biblebook_get_booknum(priv->active_biblebook), priv->active_chapter - 1);
@@ -342,7 +336,6 @@ void fidei_appwindow_init(FideiAppWindow* self) {
 
 	g_signal_connect(priv->chapter_selector, "activate", G_CALLBACK(chapter_clicked), self);
 
-	g_signal_connect(priv->leaflet_back_navbtn, "clicked", G_CALLBACK(leaflet_back_navbtn_clicked), self);
 	g_signal_connect(priv->chapter_prev_navbtn, "clicked", G_CALLBACK(chapter_prev_navbtn_clicked), self);
 	g_signal_connect(priv->chapter_fwd_navbtn, "clicked", G_CALLBACK(chapter_fwd_navbtn_clicked), self);
 }
@@ -604,7 +597,7 @@ void fidei_appwindow_open_chapter(FideiAppWindow* self, gint book, gint chapter)
 	gtk_widget_set_sensitive(GTK_WIDGET(priv->chapter_prev_navbtn), (gboolean)chapter);
 	gtk_widget_set_sensitive(GTK_WIDGET(priv->chapter_fwd_navbtn), chapter+1 < fidei_biblebook_get_num_chapters(priv->active_biblebook));
 
-	adw_leaflet_navigate(priv->main, ADW_NAVIGATION_DIRECTION_FORWARD);
+	adw_navigation_split_view_set_show_content(priv->main, true);
 
 	priv->active_chapter = chapter;
 	priv->current_view = GTK_TEXT_VIEW(chapterview);
