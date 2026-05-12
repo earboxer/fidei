@@ -33,10 +33,10 @@ typedef struct {
 } FideiPreferencesPrivate;
 
 struct _FideiPreferences {
-	AdwPreferencesWindow parent_instance;
+	AdwPreferencesDialog parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (FideiPreferences, fidei_preferences, ADW_TYPE_PREFERENCES_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (FideiPreferences, fidei_preferences, ADW_TYPE_PREFERENCES_DIALOG)
 
 enum {
 	PROP_SETTINGS = 1,

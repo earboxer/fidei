@@ -176,9 +176,7 @@ static void open_preferences_activated(GSimpleAction*, GVariant*, FideiAppWindow
 	FideiAppWindowPrivate* priv = fidei_appwindow_get_instance_private(self);
 	GtkWidget* prefs = fidei_preferences_new(priv->settings);
 
-	gtk_window_set_transient_for(GTK_WINDOW(prefs), GTK_WINDOW(self));
-	gtk_window_set_modal(GTK_WINDOW(prefs), TRUE);
-	gtk_window_present(GTK_WINDOW(prefs));
+	adw_dialog_present(ADW_DIALOG(prefs), GTK_WIDGET(self));
 }
 
 static void fidei_appwindow_setup_window_size(FideiAppWindow* self) {

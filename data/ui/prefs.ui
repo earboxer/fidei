@@ -7,7 +7,7 @@
 -->
 
 <interface>
-	<template class="FideiPreferences" parent="AdwPreferencesWindow">
+	<template class="FideiPreferences" parent="AdwPreferencesDialog">
 		<child>
 			<object class="AdwPreferencesPage">
 				<property name="title" translatable="yes">General</property>

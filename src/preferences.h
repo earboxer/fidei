@@ -25,7 +25,7 @@
 G_BEGIN_DECLS
 
 #define FIDEI_TYPE_PREFERENCES (fidei_preferences_get_type())
-G_DECLARE_FINAL_TYPE(FideiPreferences, fidei_preferences, FIDEI, PREFERENCES, AdwPreferencesWindow)
+G_DECLARE_FINAL_TYPE(FideiPreferences, fidei_preferences, FIDEI, PREFERENCES, AdwPreferencesDialog)
 
 GtkWidget* fidei_preferences_new(GSettings* settings);
 
