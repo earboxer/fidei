@@ -169,7 +169,7 @@ static void navigate_picker_activated(GSimpleAction*, GVariant*, FideiAppWindow*
 }
 
 static void open_aboutwin_activated(GSimpleAction*, GVariant*, FideiAppWindow* self) {
-	gtk_widget_show(fidei_get_aboutdiag(GTK_WINDOW(self)));
+	gtk_window_present(GTK_WINDOW(fidei_get_aboutdiag(GTK_WINDOW(self))));
 }
 
 static void open_preferences_activated(GSimpleAction*, GVariant*, FideiAppWindow* self) {
@@ -178,7 +178,7 @@ static void open_preferences_activated(GSimpleAction*, GVariant*, FideiAppWindow
 
 	gtk_window_set_transient_for(GTK_WINDOW(prefs), GTK_WINDOW(self));
 	gtk_window_set_modal(GTK_WINDOW(prefs), TRUE);
-	gtk_widget_show(prefs);
+	gtk_window_present(GTK_WINDOW(prefs));
 }
 
 static void fidei_appwindow_setup_window_size(FideiAppWindow* self) {
@@ -209,7 +209,7 @@ static void fidei_appwindow_captions_changed(GSettings*, gchar* key, FideiAppWin
 
 static void info_btn_clicked(GtkButton*, FideiAppWindow* self) {
 	FideiAppWindowPrivate* priv = fidei_appwindow_get_instance_private(self);
-	gtk_widget_show(fidei_bibleinfo_diag_new(GTK_WINDOW(self), priv->active_bible));
+	gtk_window_present(GTK_WINDOW(fidei_bibleinfo_diag_new(GTK_WINDOW(self), priv->active_bible)));
 }
 
 static void bible_selector_clicked(GtkListBox*, GtkListBoxRow* row, FideiAppWindow* self) {

@@ -94,7 +94,7 @@ static GListStore* create_bible_list() {
 static void activate(GtkApplication* app, GListStore* store) {
 	GtkWidget* win = fidei_appwindow_new(app, G_LIST_MODEL(store));
 	gtk_window_set_title(GTK_WINDOW(win), "Fidei");
-	gtk_widget_show(win);
+	gtk_window_present(GTK_WINDOW(win));
 }
 
 int main(int argc, char** argv) {
@@ -114,7 +114,7 @@ int main(int argc, char** argv) {
 	GListStore* bibles = create_bible_list();
 
 	g_resources_register(fidei_resource_get_resource());
-	app = adw_application_new("arpa.sp1rit.Fidei", G_APPLICATION_FLAGS_NONE);
+	app = adw_application_new("arpa.sp1rit.Fidei", G_APPLICATION_DEFAULT_FLAGS);
 	g_signal_connect(app, "activate", G_CALLBACK(activate), bibles);
 	status = g_application_run(G_APPLICATION(app), argc, argv);
 	g_object_unref(app);
