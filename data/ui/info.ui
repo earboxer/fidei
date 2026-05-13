@@ -7,8 +7,7 @@
 -->
 
 <interface>
-	<template class="FideiBibleInfoDiag" parent="GtkDialog">
-		<property name="modal">true</property>
+	<template class="FideiBibleInfoDiag" parent="AdwDialog">
 		<!--property name="title" translatable="yes">Bible information</property-->
 		<child>
 			<object class="AdwToastOverlay" id="toasts">

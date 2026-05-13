@@ -33,10 +33,10 @@ typedef struct {
 } FideiBibleInfoDiagPrivate;
 
 struct _FideiBibleInfoDiag {
-	GtkDialog parent_instance;
+	AdwDialog parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE(FideiBibleInfoDiag, fidei_bibleinfo_diag, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE_WITH_PRIVATE(FideiBibleInfoDiag, fidei_bibleinfo_diag, ADW_TYPE_DIALOG)
 
 enum {
 	PROP_PARENT = 1,
@@ -143,7 +143,7 @@ void fidei_bibleinfo_diag_init(FideiBibleInfoDiag* self) {
 	priv->bible = NULL;
 
 	g_type_ensure(FIDEI_TYPE_BIBLEINFO_ROW);
-	gtk_window_set_title(GTK_WINDOW(self), _t("Bible information"));
+	adw_dialog_set_title(ADW_DIALOG(self), _t("Bible information"));
 
 	gtk_widget_init_template(GTK_WIDGET(self));
 
@@ -170,8 +170,6 @@ void fidei_bibleinfo_diag_set_parent(FideiBibleInfoDiag* self, GtkWindow* parent
 		return;
 
 	priv->parent = parent;
-
-	gtk_window_set_transient_for(GTK_WINDOW(self), priv->parent);
 
 	g_object_notify_by_pspec(G_OBJECT(self), obj_properties[PROP_PARENT]);
 }

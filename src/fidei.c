@@ -207,7 +207,7 @@ static void fidei_appwindow_captions_changed(GSettings*, gchar* key, FideiAppWin
 
 static void info_btn_clicked(GtkButton*, FideiAppWindow* self) {
 	FideiAppWindowPrivate* priv = fidei_appwindow_get_instance_private(self);
-	gtk_window_present(GTK_WINDOW(fidei_bibleinfo_diag_new(GTK_WINDOW(self), priv->active_bible)));
+	adw_dialog_present(ADW_DIALOG(fidei_bibleinfo_diag_new(GTK_WINDOW(self), priv->active_bible)), GTK_WIDGET(self));
 }
 
 static void bible_selector_clicked(GtkListBox*, GtkListBoxRow* row, FideiAppWindow* self) {
