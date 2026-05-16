@@ -20,7 +20,6 @@ src = [
 	'app.c',
 	'fidei.c',
 	'bible.c',
-	'about.c',
 	'bibleinfo_diag.c',
 	'bibleinfo_row.c',
 	'bible_item.c',

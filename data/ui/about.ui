@@ -7,14 +7,13 @@
 -->
 
 <interface>
-	<object id="diag" class="GtkAboutDialog">
-		<!--property name="logo-icon-name">arpa.sp1rit.Fidei</property-->
-		<property name="program-name">Fidei</property>
+	<object id="diag" class="AdwAboutDialog">
+		<property name="application-icon">arpa.sp1rit.Fidei</property>
+		<property name="application-name">Fidei</property>
 		<property name="comments" translatable="yes">Take back your faith</property>
 		<property name="copyright" translatable="yes">Copyright (c) 2022 Florian "sp1rit" and contributors</property>
 		<property name="license-type">GTK_LICENSE_AGPL_3_0</property>
 		<property name="website">https://github.com/sp1ritCS/fidei</property>
-		<property name="website-label">github.com/sp1ritCS/fidei</property>
-		<property name="authors">Florian "sp1rit" &lt;sp1rit@national.shitposting.agency&gt;</property>
+		<property name="developers">Florian "sp1rit" &lt;sp1rit@national.shitposting.agency&gt;</property>
 	</object>
 </interface>

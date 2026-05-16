@@ -17,7 +17,6 @@
 */
 
 #include "fidei.h"
-#include "about.h"
 #include "bibleinfo_diag.h"
 #include "bible_item.h"
 #include "num.h"
@@ -169,7 +168,14 @@ static void navigate_picker_activated(GSimpleAction*, GVariant*, FideiAppWindow*
 }
 
 static void open_aboutwin_activated(GSimpleAction*, GVariant*, FideiAppWindow* self) {
-	gtk_window_present(GTK_WINDOW(fidei_get_aboutdiag(GTK_WINDOW(self))));
+	GtkBuilder* builder = gtk_builder_new_from_resource("/arpa/sp1rit/Fidei/ui/about.ui");
+	AdwAboutDialog* dialog = ADW_ABOUT_DIALOG(gtk_builder_get_object(builder, "diag"));
+	#ifdef FIDEI_VERSION
+		adw_about_dialog_set_version(ADW_ABOUT_DIALOG(dialog), FIDEI_VERSION);
+	#endif
+
+	adw_dialog_present(ADW_DIALOG(dialog), GTK_WIDGET(self));
+	g_object_unref(builder);
 }
 
 static void open_preferences_activated(GSimpleAction*, GVariant*, FideiAppWindow* self) {
